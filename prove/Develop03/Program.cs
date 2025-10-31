@@ -68,7 +68,7 @@ class Program
                 Console.Clear();
                 Console.WriteLine(scripture.GetRenderedText());
                 Console.WriteLine();
-                Console.WriteLine(" Great Scripture mastery today!!!");
+                Console.WriteLine(" Great Scripture mastery attempt today!!!");
                 break;
             }
         }
