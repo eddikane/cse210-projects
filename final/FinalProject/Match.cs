@@ -15,11 +15,9 @@ public class Match
 
     public double GetPassAccuracy()
     {
-        if (PassesAttempted == 0)
-        {
-            return 0;
-        }
+        if (PassesAttempted == 0) return 0;
 
         return (double)PassesCompleted / (double)PassesAttempted * 100;
     }
 }
+

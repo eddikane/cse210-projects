@@ -1,6 +1,7 @@
 public class ShootingDrill : TrainingDrill
 {
-    public ShootingDrill() : base("Do 20 shooting repetitions.")
+    public ShootingDrill() 
+        : base("Perform 20 shooting repetitions focusing on accuracy.")
     {
 
     }

@@ -7,6 +7,6 @@ public class Defender : Player
 
     public override string GetWeaknesses()
     {
-        return "Should work on positioning.";
+        return "Should work on positioning and timing.";
     }
 }

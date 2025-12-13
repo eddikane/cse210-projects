@@ -2,9 +2,9 @@ public abstract class TrainingDrill
 {
     protected string _description;
 
-    public TrainingDrill(string desc)
+    public TrainingDrill(string description)
     {
-        _description = desc;
+        _description = description;
     }
 
     public virtual string PerformDrill()

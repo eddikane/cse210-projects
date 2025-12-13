@@ -10,13 +10,15 @@ class Program
         Player player = CreatePlayer();
 
         string choice = "";
-        while (choice != "4")
+        while (choice != "6")
         {
             Console.WriteLine();
             Console.WriteLine("1. Add Match");
             Console.WriteLine("2. View Stats");
-            Console.WriteLine("3. Generate Training Plan");
-            Console.WriteLine("4. Exit");
+            Console.WriteLine("3. View Weaknesses");
+            Console.WriteLine("4. Generate Training Plan");
+            Console.WriteLine("5. View Player Rating");
+            Console.WriteLine("6. Exit");
             Console.Write("Choose an option: ");
             choice = Console.ReadLine();
 
@@ -30,58 +32,54 @@ class Program
             }
             else if (choice == "3")
             {
-                TrainingPlanner planner = new TrainingPlanner();
-                List<TrainingDrill> plan = planner.GeneratePlan(player);
-
-                Console.WriteLine("Training Plan:");
-                foreach (TrainingDrill drill in plan)
-                {
-                    Console.WriteLine(drill.PerformDrill());
-                }
+                Console.WriteLine("Weaknesses: " + player.GetWeaknesses());
             }
             else if (choice == "4")
             {
-                Console.WriteLine("Exiting...");
+                TrainingPlanner planner = new TrainingPlanner();
+                List<TrainingDrill> plan = planner.GeneratePlan(player);
+
+                Console.WriteLine();
+                Console.WriteLine("=== Training Plan ===");
+                foreach (TrainingDrill drill in plan)
+                {
+                    Console.WriteLine("- " + drill.PerformDrill());
+                }
             }
-            else
+            else if (choice == "5")
             {
-                Console.WriteLine("Invalid choice.");
+                Console.WriteLine("Player Rating: " + player.GetRating() + "/100");
             }
         }
+
+        Console.WriteLine("Goodbye!");
     }
 
     static Player CreatePlayer()
     {
         Console.WriteLine();
-        Console.Write("Enter player name: ");
+        Console.Write("Player name: ");
         string name = Console.ReadLine();
 
-        Console.Write("Enter age: ");
+        Console.Write("Player age: ");
         int age = int.Parse(Console.ReadLine());
 
-        Console.WriteLine("Position:");
+        Console.WriteLine("Select Position:");
         Console.WriteLine("1. Striker");
         Console.WriteLine("2. Midfielder");
         Console.WriteLine("3. Defender");
-        Console.Write("Choose: ");
+        Console.Write("Choice: ");
+
         string option = Console.ReadLine();
 
-        if (option == "1")
-        {
-            return new Striker(name, age);
-        }
-        else if (option == "2")
-        {
-            return new Midfielder(name, age);
-        }
-        else
-        {
-            return new Defender(name, age);
-        }
+        if (option == "1") return new Striker(name, age);
+        if (option == "2") return new Midfielder(name, age);
+        return new Defender(name, age);
     }
 
     static void AddMatch(Player player)
     {
+        Console.WriteLine();
         Console.Write("Goals: ");
         int g = int.Parse(Console.ReadLine());
 
@@ -100,3 +98,4 @@ class Program
         Console.WriteLine("Match added!");
     }
 }
+

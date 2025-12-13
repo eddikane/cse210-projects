@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 public abstract class Player
@@ -30,15 +29,16 @@ public abstract class Player
     {
         if (_matches.Count == 0)
         {
-            return "No matches recorded.\n";
+            return "No match data yet.\n";
         }
 
         int totalGoals = 0;
         int totalAssists = 0;
         double totalAccuracy = 0;
 
-        foreach (Match m in _matches)
+        for (int i = 0; i < _matches.Count; i++)
         {
+            Match m = _matches[i];
             totalGoals += m.Goals;
             totalAssists += m.Assists;
             totalAccuracy += m.GetPassAccuracy();
@@ -47,10 +47,39 @@ public abstract class Player
         double avgAccuracy = totalAccuracy / _matches.Count;
 
         string result = "";
-        result += "Total Goals: " + totalGoals + "\n";
-        result += "Total Assists: " + totalAssists + "\n";
+        result += "Goals: " + totalGoals + "\n";
+        result += "Assists: " + totalAssists + "\n";
         result += "Average Pass Accuracy: " + avgAccuracy + "%\n";
 
         return result;
+    }
+
+    public int GetRating()
+    {
+        if (_matches.Count == 0)
+        {
+            return 0;
+        }
+
+        int totalGoals = 0;
+        double totalAccuracy = 0;
+
+        for (int i = 0; i < _matches.Count; i++)
+        {
+            totalGoals += _matches[i].Goals;
+            totalAccuracy += _matches[i].GetPassAccuracy();
+        }
+
+        double avgAccuracy = totalAccuracy / _matches.Count;
+
+        // Simple beginner-friendly formula
+        int rating = (totalGoals * 10) + (int)(avgAccuracy / 5);
+
+        if (rating > 100)
+        {
+            rating = 100;
+        }
+
+        return rating;
     }
 }
